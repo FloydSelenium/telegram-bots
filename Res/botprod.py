@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 
 phone_number = 0
 
-def decrypt(string):
+def split(string):
     left, right = string.split(':')
     number = right[1:6]
     return str(number)
@@ -155,8 +155,8 @@ def open_browser():
     browser.quit()
 
     try:
-        fdata = open(f"A:/BigDeal/Release/Bots/bot{str(bot_counter+1)}/Data.txt", 'w')
-        fdata.write(str(bot_counter+1) + '\n')
+        fdata = open(f"A:/BigDeal/Release/Bots/bot{str(bot_counter + 1)}/Data.txt", 'w')
+        fdata.write(str(bot_counter + 1) + '\n')
         fdata.write(str(api_id) + '\n')
         fdata.write(str(api_hash) + '\n')
         print("Data write done")
@@ -210,12 +210,6 @@ def get_code():
     pyautogui.hotkey('alt', 'tab')
     return (pyperclip.paste())
 
-def decrypt(string):
-    left, right = string.split(':')
-    number = right[1:6]
-    return str(number)
-
-
 def first_login():
     subprocess.run(["powershell", "start A:/BigDeal/Release/Bat/tgKill.bat"], shell=True)
     subprocess.Popen(f'start powershell python A:/BigDeal/Release/Bots/bot{str(bot_counter+1)}/Bot.py', shell = True)
@@ -225,7 +219,7 @@ def first_login():
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
     os.startfile('A:/BigDeal/Release/Tg/Telegram.exe')
-    #pyautogui.hotkey('alt', 'tab')
+    
     time.sleep(10)
     pyautogui.moveTo(260, 150, duration=0.5)
     pyautogui.click()
@@ -238,7 +232,7 @@ def first_login():
     pyautogui.hotkey('ctrl', 'c')
 
     code_string = pyperclip.paste()
-    pyperclip.copy(decrypt(str(code_string)))
+    pyperclip.copy(split(str(code_string)))
     pyautogui.hotkey('alt', 'tab')
     pyautogui.hotkey('ctrl', 'v')
     pyautogui.press('enter')
